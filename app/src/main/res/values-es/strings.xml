@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Forecastify</string>
+    <string name="city_country">%1$s, %2$s</string>
+    <string name="actual_date">Actualizado a las %1$s</string>
+    <string name="latitude">Latitud: %1$s</string>
+    <string name="longitude">Longitud: %1$s</string>
+    <string name="main_description">%1$s</string>
+    <string name="main_temperature">%1$s°C</string>
+    <string name="feels_like">Sensación de %1$s °C</string>
+    <string name="min_temperature">Min %1$s °C</string>
+    <string name="max_temperature">Max %1$s °C</string>
+    <string name="sunrise">%1$s</string>
+    <string name="sunset">%1$s</string>
+    <string name="wind">%1$s m/s</string>
+    <string name="pressure">%1$s hPa</string>
+    <string name="humidity">%1$s %%</string>
+</resources>
