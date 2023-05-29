@@ -114,10 +114,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 changeContent(false)
             } catch (e: Exception) {
-                Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-
+                Toast.makeText(this@MainActivity, "${e.message}", Toast.LENGTH_LONG).show()
                 // Esperamos 5 segundos para volver a intentar
                 delay(5000)
+
+                checkLocatePermission()
                 refreshWeather(view)
             }
         }
@@ -144,9 +145,9 @@ class MainActivity : AppCompatActivity() {
                 "es"
             )
         } catch (e: IOException) {
-            throw Exception("Error de red al obtener datos del clima.")
+            throw Exception("Problemas en la conexión de red.")
         } catch (e: Exception) {
-            throw Exception("Error al obtener datos del clima: ${e.message}")
+            throw Exception("Error al obtener datos del clima.")
         }
     }
 
