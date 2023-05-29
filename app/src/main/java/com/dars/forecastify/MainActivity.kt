@@ -27,7 +27,7 @@ import com.dars.forecastify.service.WeatherApiService
 
 class MainActivity : AppCompatActivity() {
 
-    private val LOCATION_PERMISSION_REQUEST_CODE = 100
+    private val locationPermissionRequestCode = 100
 
     private lateinit var cityCountry: TextView
     private lateinit var actualDate: TextView
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
+                locationPermissionRequestCode
             )
         }
     }
