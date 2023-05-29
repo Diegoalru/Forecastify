@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -25,6 +26,8 @@ import com.dars.forecastify.models.WeatherData
 import com.dars.forecastify.service.WeatherApiService
 
 class MainActivity : AppCompatActivity() {
+
+    private val LOCATION_PERMISSION_REQUEST_CODE = 100
 
     private lateinit var cityCountry: TextView
     private lateinit var actualDate: TextView
@@ -69,8 +72,21 @@ class MainActivity : AppCompatActivity() {
         pressure = findViewById(R.id.pressure)
         humidity = findViewById(R.id.humidity)
 
+        checkLocatePermission()
+
         // Iniciamos la aplicación con la ubicación actual
         refreshWeather(mainContent)
+    }
+
+    private fun checkLocatePermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // El permiso no ha sido concedido, solicitarlo
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
     }
 
     private fun getRetrofit(): Retrofit {
