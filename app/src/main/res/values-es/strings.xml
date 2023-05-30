@@ -16,4 +16,12 @@
     <string name="pressure">%1$s hPa</string>
     <string name="humidity">%1$s %%</string>
     <string name="loading">Cargando…</string>
+    <string name="refresh">Recargar</string>
+    <string name="lbl_sunrise">Amanecer</string>
+    <string name="lbl_sunset">Atardecer</string>
+    <string name="lbl_wind">Viento</string>
+    <string name="lbl_pressure">Presión</string>
+    <string name="lbl_humidity">Humedad</string>
+    <string name="created_by">Creado Por</string>
+    <string name="author">Diego Rubí S.</string>
 </resources>
