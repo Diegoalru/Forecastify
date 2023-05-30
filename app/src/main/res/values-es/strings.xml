@@ -6,10 +6,10 @@
     <string name="latitude">Latitud: %1$s</string>
     <string name="longitude">Longitud: %1$s</string>
     <string name="main_description">%1$s</string>
-    <string name="main_temperature">%1$s°C</string>
-    <string name="feels_like">Sensación de %1$s °C</string>
-    <string name="min_temperature">Min %1$s °C</string>
-    <string name="max_temperature">Max %1$s °C</string>
+    <string name="main_temperature">%1$s</string>
+    <string name="feels_like">Sensación de %1$s</string>
+    <string name="min_temperature">Min %1$s</string>
+    <string name="max_temperature">Max %1$s</string>
     <string name="sunrise">%1$s</string>
     <string name="sunset">%1$s</string>
     <string name="wind">%1$s m/s</string>
@@ -17,6 +17,7 @@
     <string name="humidity">%1$s %%</string>
     <string name="loading">Cargando…</string>
     <string name="refresh">Recargar</string>
+    <string name="btn_config">Ajustes</string>
     <string name="lbl_sunrise">Amanecer</string>
     <string name="lbl_sunset">Atardecer</string>
     <string name="lbl_wind">Viento</string>
@@ -24,4 +25,18 @@
     <string name="lbl_humidity">Humedad</string>
     <string name="created_by">Creado Por</string>
     <string name="author">Diego Rubí S.</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- SettingsActivity -->
+    <string name="title_activity_settings">Ajustes</string>
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="about_header">Acerca de</string>
+    <string name="version_title">Versión</string>
+    <string name="version_summary">1.0</string>
+    <string name="units_title">Unidades de Medida</string>
+    <!-- SettingsActivity -->
 </resources>

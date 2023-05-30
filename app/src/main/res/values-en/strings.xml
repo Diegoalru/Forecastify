@@ -6,10 +6,10 @@
     <string name="latitude">Latitude: %1$s</string>
     <string name="longitude">Longitude: %1$s</string>
     <string name="main_description">%1$s</string>
-    <string name="main_temperature">%1$s °C</string>
-    <string name="feels_like">Feels like %1$s °C</string>
-    <string name="min_temperature">Min %1$s °C</string>
-    <string name="max_temperature">Max %1$s °C</string>
+    <string name="main_temperature">%1$s</string>
+    <string name="feels_like">Feels like %1$s</string>
+    <string name="min_temperature">Min %1$s</string>
+    <string name="max_temperature">Max %1$s</string>
     <string name="sunrise">%1$s</string>
     <string name="sunset">%1$s</string>
     <string name="wind">%1$s m/s</string>
@@ -17,6 +17,7 @@
     <string name="humidity">%1$s %%</string>
     <string name="loading">Loading…</string>
     <string name="refresh">Refresh</string>
+    <string name="btn_config">Settings</string>
     <string name="lbl_sunrise">Sunrise</string>
     <string name="lbl_sunset">Sunset</string>
     <string name="lbl_wind">Wind</string>
@@ -24,4 +25,19 @@
     <string name="lbl_humidity">Humidity</string>
     <string name="created_by">Created By</string>
     <string name="author">Diego Rubí S.</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- SettingsActivity -->
+    <string name="title_activity_settings">Settings</string>
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="about_header">About</string>
+    <string name="version_title">Version</string>
+    <string name="version_summary">1.0</string>
+    <string name="units_title">Units of measurement</string>
+    <!-- SettingsActivity -->
+
 </resources>

@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <PreferenceCategory
+        app:title="@string/units_title">
+
+        <ListPreference
+            app:defaultValue="metric"
+            app:entries="@array/units_entries"
+            app:entryValues="@array/units_values"
+            app:key="unit"
+            app:title="@string/units_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <!--
+    <PreferenceCategory app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
+    -->
+
+    <PreferenceCategory app:title="@string/about_header">
+        <Preference
+            app:key="version"
+            app:summary="@string/version_summary"
+            app:title="@string/version_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
