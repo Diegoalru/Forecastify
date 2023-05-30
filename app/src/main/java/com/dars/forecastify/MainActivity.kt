@@ -11,6 +11,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dars.forecastify.controllers.WeatherController
 import com.dars.forecastify.models.WeatherData
+import com.dars.forecastify.utils.Language
+import com.dars.forecastify.utils.Mode
+import com.dars.forecastify.utils.Unit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,7 +43,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loadingContent: View
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
     private val weatherController = WeatherController()
+    private lateinit var mode: Mode
+    private lateinit var unit: Unit
+    private lateinit var lang: Language
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +71,10 @@ class MainActivity : AppCompatActivity() {
         windiness = findViewById(R.id.wind)
         pressure = findViewById(R.id.pressure)
         humidity = findViewById(R.id.humidity)
+
+        mode = Mode.JSON
+        unit = Unit.METRIC
+        lang = Language.ES
 
         checkLocatePermission()
 
@@ -91,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             changeContent(true)
 
             try {
-                val weatherData = weatherController.getWeatherData(this@MainActivity)
+                val weatherData = weatherController.getWeatherData(this@MainActivity, mode.value, unit.value, lang.value)
 
                 if (weatherData != null) {
                     updateUI(weatherData)

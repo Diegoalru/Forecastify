@@ -6,9 +6,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import androidx.core.app.ActivityCompat
-import com.dars.forecastify.BuildConfig
-import com.dars.forecastify.models.WeatherData
-import com.dars.forecastify.service.WeatherApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
@@ -16,6 +13,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+import com.dars.forecastify.BuildConfig
+import com.dars.forecastify.models.WeatherData
+import com.dars.forecastify.service.WeatherApiService
 
 class WeatherController {
 
@@ -35,7 +35,7 @@ class WeatherController {
      * @param context Contexto de la aplicación.
      * @return Retorna la información del clima mediante un objeto WeatherData.
      */
-    suspend fun getWeatherData(context: Context): WeatherData? {
+    suspend fun getWeatherData(context: Context, mode: String, units: String, lang: String): WeatherData? {
         val weatherApi = getWeatherApiService()
 
         val apiKey = BuildConfig.API_KEY
@@ -51,9 +51,9 @@ class WeatherController {
                 locationLatitude,
                 locationLongitude,
                 apiKey,
-                "json",
-                "metric",
-                "es"
+                mode,
+                units,
+                lang
             )
         } catch (e: IOException) {
             throw Exception("Problemas en la conexión de red.")
