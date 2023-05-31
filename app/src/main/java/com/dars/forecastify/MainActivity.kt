@@ -1,14 +1,17 @@
 package com.dars.forecastify
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -40,6 +43,24 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private var userLocation: LatLng? = null
 
+    private val mapsResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+
+            userLocation = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                // TODO: Convertir resultado a LatLng
+                val latitude = data?.getDoubleExtra("latitude", 0.0)
+                val longitude = data?.getDoubleExtra("longitude", 0.0)
+                LatLng(latitude!!, longitude!!)
+            } else {
+                val location = data?.getParcelableExtra("location") as LatLng?
+                location
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,9 +73,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         // Iniciamos la aplicación con la ubicación actual
         refreshWeather()
-
-        // Iniciamos la aplicación con la ubicación seleccionada
-        userLocation = intent.getParcelableExtra("location")
     }
 
     override fun onResume() {
@@ -180,22 +198,17 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                         if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
                     })
                 temp.text = getString(
-                    R.string.main_temperature,
-                    "${main.temperature} $unitOfMeasure"
+                    R.string.main_temperature, "${main.temperature} $unitOfMeasure"
                 )
-                feelsLike.text =
-                    getString(R.string.feels_like, "${main.feelsLike} $unitOfMeasure")
+                feelsLike.text = getString(R.string.feels_like, "${main.feelsLike} $unitOfMeasure")
                 tempMin.text = getString(
-                    R.string.min_temperature,
-                    "${main.temperatureMin} $unitOfMeasure"
+                    R.string.min_temperature, "${main.temperatureMin} $unitOfMeasure"
                 )
                 tempMax.text = getString(
-                    R.string.max_temperature,
-                    "${main.temperatureMax} $unitOfMeasure"
+                    R.string.max_temperature, "${main.temperatureMax} $unitOfMeasure"
                 )
                 txtSunrise.text = getString(
-                    R.string.sunrise,
-                    dateUtils.convertUnixDate(sys.sunrise, false)
+                    R.string.sunrise, dateUtils.convertUnixDate(sys.sunrise, false)
                 )
                 txtSunset.text =
                     getString(R.string.sunset, dateUtils.convertUnixDate(sys.sunset, false))
@@ -228,8 +241,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     fun openMap(view: View) {
-        // Iniciar la actividad del mapa y destruir la actual
-        val intentMap = Intent(this, MapsActivity::class.java)
-        startActivity(intentMap)
+        val mapsIntent = Intent(this, MapsActivity::class.java)
+        mapsResultLauncher.launch(mapsIntent)
     }
 }

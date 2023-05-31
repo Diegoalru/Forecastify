@@ -20,19 +20,16 @@ class LocationController {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                context, Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                context, Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return null
         }
 
         val providers = listOf(
-            LocationManager.GPS_PROVIDER,
-            LocationManager.NETWORK_PROVIDER
+            LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER
         )
 
         var bestLocation: Location? = null
@@ -54,6 +51,15 @@ class LocationController {
 
         location.latitude = userLocation.latitude
         location.longitude = userLocation.longitude
+
+        return location
+    }
+
+    fun convertFromCoordinatesToLocation(latitude: Double, longitude: Double): Location {
+        val location = Location("")
+
+        location.latitude = latitude
+        location.longitude = longitude
 
         return location
     }

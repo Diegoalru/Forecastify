@@ -1,6 +1,7 @@
 package com.dars.forecastify
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -69,9 +70,16 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun onSetLocationClick(view: View) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("location", location)
-        startActivity(intent)
+        val resultIntent = Intent(this, MainActivity::class.java)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            resultIntent.putExtra("latitude", location.latitude)
+            resultIntent.putExtra("longitude", location.longitude)
+        } else {
+            resultIntent.putExtra("location", location)
+        }
+
+        setResult(RESULT_OK, resultIntent)
         finish()
     }
 }
