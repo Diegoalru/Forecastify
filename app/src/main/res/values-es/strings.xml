@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Forecastify</string>
-    <string name="city_country">%1$s, %2$s</string>
+    <string name="city_country">%1$s</string>
+    <string name="unknown_city">Desconocido</string>
     <string name="actual_date">Actualizado a las %1$s</string>
     <string name="latitude">Latitud: %1$s</string>
     <string name="longitude">Longitud: %1$s</string>
@@ -39,4 +40,11 @@
     <string name="version_summary">1.0</string>
     <string name="units_title">Unidades de Medida</string>
     <!-- SettingsActivity -->
+
+    <!-- MapsActivity -->
+    <string name="title_activity_maps">Google Maps</string>
+    <string name="btn_get_your_location">Tu ubicación</string>
+    <string name="btn_select_location">Establecer ubicación</string>
+    <!-- MapsActivity -->
+
 </resources>

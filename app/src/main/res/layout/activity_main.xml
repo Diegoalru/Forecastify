@@ -49,19 +49,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <TextView
                 android:id="@+id/latitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:text="@string/latitude"/>
-
             <TextView
                 android:id="@+id/longitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:text="@string/longitude"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/map"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/map"
+                android:contentDescription="@string/refresh"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:onClick="openMap"/>
         </LinearLayout>
 
         <LinearLayout
@@ -101,8 +115,8 @@
                     android:layout_gravity="center" />
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:contentDescription="@string/refresh"
                     android:onClick="refreshWeatherEvent"
                     android:src="@drawable/reload"
