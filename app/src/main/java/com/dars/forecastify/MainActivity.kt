@@ -16,9 +16,11 @@ import androidx.preference.PreferenceManager
 import com.dars.forecastify.controllers.WeatherController
 import com.dars.forecastify.databinding.ActivityMainBinding
 import com.dars.forecastify.models.WeatherData
+import com.dars.forecastify.utils.DateUtils
 import com.dars.forecastify.utils.Language
 import com.dars.forecastify.utils.Mode
 import com.dars.forecastify.utils.Unit
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -33,7 +35,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private val locationPermissionRequestCode = 100
     private val weatherController = WeatherController()
+    private val dateUtils = DateUtils()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
+    private var userLocation: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         // Iniciamos la aplicación con la ubicación actual
         refreshWeather()
+
+        // Iniciamos la aplicación con la ubicación seleccionada
+        userLocation = intent.getParcelableExtra("location")
     }
 
     override fun onResume() {
@@ -122,7 +130,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             try {
                 val weatherData = weatherController.getWeatherData(
-                    this@MainActivity, Mode.JSON.value, unit.value, lang.value
+                    this@MainActivity, Mode.JSON.value, unit.value, lang.value, userLocation
                 )
 
                 if (weatherData != null) {
@@ -155,9 +163,16 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
 
             binding.apply {
-                cityCountry.text = getString(R.string.city_country, name, sys.country)
+
+                val city = if (name.isNotEmpty()) {
+                    "$name, ${sys.country}"
+                } else {
+                    getString(R.string.unknown_city)
+                }
+
+                cityCountry.text = getString(R.string.city_country, city)
                 updatedAt.text =
-                    getString(R.string.actual_date, weatherController.convertUnixDate(dt, true))
+                    getString(R.string.actual_date, dateUtils.convertUnixDate(dt, true))
                 latitude.text = getString(R.string.latitude, coord.latitude.toString())
                 longitude.text = getString(R.string.longitude, coord.longitude.toString())
                 mainDescription.text =
@@ -180,10 +195,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 )
                 txtSunrise.text = getString(
                     R.string.sunrise,
-                    weatherController.convertUnixDate(sys.sunrise, false)
+                    dateUtils.convertUnixDate(sys.sunrise, false)
                 )
                 txtSunset.text =
-                    getString(R.string.sunset, weatherController.convertUnixDate(sys.sunset, false))
+                    getString(R.string.sunset, dateUtils.convertUnixDate(sys.sunset, false))
                 txtWind.text = getString(R.string.wind, wind.speed.toString())
                 txtPressure.text = getString(R.string.pressure, main.pressure.toString())
                 txtHumidity.text = getString(R.string.humidity, main.humidity.toString())
@@ -210,5 +225,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             "imperial" -> Unit.IMPERIAL
             else -> Unit.METRIC
         }
+    }
+
+    fun openMap(view: View) {
+        // Iniciar la actividad del mapa y destruir la actual
+        val intentMap = Intent(this, MapsActivity::class.java)
+        startActivity(intentMap)
     }
 }
