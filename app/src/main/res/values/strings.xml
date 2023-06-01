@@ -29,15 +29,9 @@
 
     <!-- SettingsActivity -->
     <string name="title_activity_settings">Settings</string>
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="action_settings">Settings\n</string>
     <string name="about_header">About</string>
     <string name="version_title">Version</string>
-    <string name="version_summary">1.0</string>
     <string name="units_title">Units of measurement</string>
     <!-- SettingsActivity -->
 
@@ -45,5 +39,9 @@
     <string name="title_activity_maps">Google Maps</string>
     <string name="btn_get_your_location">Your location</string>
     <string name="btn_select_location">Select location</string>
+    <string name="search_location_hint">Search location</string>
+    <string name="open_map">Open Map</string>
+    <string name="location_not_found" >Location not found</string>
+    <string name="error_connection">Error on connection</string>
     <!-- MapsActivity -->
 </resources>
