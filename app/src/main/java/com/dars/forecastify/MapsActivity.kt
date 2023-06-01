@@ -19,7 +19,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
-
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
@@ -63,7 +62,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             location = latLng
 
             mMap.addMarker(MarkerOptions().position(latLng))
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f))
         }
     }
 
@@ -104,18 +103,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         try {
-            val addressList: List<Address>
-            val geoCoder = Geocoder(this)
-            addressList = geoCoder.getFromLocationName(locationTxt, 1)!!
 
-            mMap.clear()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val geocodeListener = Geocoder.GeocodeListener { addresses ->
+                    if (addresses.size > 0) {
+                        mMap.clear()
 
-            location = LatLng(addressList[0].latitude, addressList[0].longitude)
-            mMap.addMarker(MarkerOptions().position(location).title(locationTxt))
+                        val address = addresses[0]
+                        location = LatLng(address.latitude, address.longitude)
+                        mMap.addMarker(MarkerOptions().position(location).title(locationTxt))
 
-            // Get current zoom level and add 2
-            val zoomLevel = mMap.cameraPosition.zoom + 2f
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
+                        // Get current zoom level and zoom in
+                        val zoomLevel = mMap.cameraPosition.zoom + 2f
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
+                    }
+                }
+
+                val geoCoder = Geocoder(this)
+                geoCoder.getFromLocationName(locationTxt, 1, geocodeListener)
+            } else {
+                val addressList: List<Address>
+                val geoCoder = Geocoder(this)
+                addressList = geoCoder.getFromLocationName(locationTxt, 1)!!
+
+                mMap.clear()
+
+                location = LatLng(addressList[0].latitude, addressList[0].longitude)
+                mMap.addMarker(MarkerOptions().position(location).title(locationTxt))
+
+                // Get current zoom level and zoom in
+                val zoomLevel = mMap.cameraPosition.zoom + 2f
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
+            }
+
         } catch (e: IOException) {
             Toast.makeText(this, getString(R.string.error_connection), Toast.LENGTH_SHORT).show()
         } catch (e: IndexOutOfBoundsException) {
