@@ -18,6 +18,7 @@
     <string name="humidity">%1$s %%</string>
     <string name="loading">Cargando…</string>
     <string name="refresh">Recargar</string>
+    <string name="open_map">Abrir Mapa</string>
     <string name="btn_config">Ajustes</string>
     <string name="lbl_sunrise">Amanecer</string>
     <string name="lbl_sunset">Atardecer</string>
@@ -30,14 +31,8 @@
 
     <!-- SettingsActivity -->
     <string name="title_activity_settings">Ajustes</string>
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="about_header">Acerca de</string>
     <string name="version_title">Versión</string>
-    <string name="version_summary">1.0</string>
     <string name="units_title">Unidades de Medida</string>
     <!-- SettingsActivity -->
 
@@ -45,6 +40,10 @@
     <string name="title_activity_maps">Google Maps</string>
     <string name="btn_get_your_location">Tu ubicación</string>
     <string name="btn_select_location">Establecer ubicación</string>
+    <string name="search_location_hint">Buscar ubicación</string>
+    <string name="location_not_found" >Ubicación no encontrada</string>
+    <string name="error_connection">Error en la conexión</string>
+
     <!-- MapsActivity -->
 
 </resources>
