@@ -41,8 +41,8 @@
                 android:id="@+id/updated_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:text="@string/actual_date"/>
+                android:text="@string/actual_date"
+                android:textSize="22sp" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -53,29 +53,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <TextView
-                android:id="@+id/latitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:text="@string/latitude"/>
-            <TextView
-                android:id="@+id/longitude"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:text="@string/longitude"/>
+
+                <TextView
+                    android:id="@+id/latitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/latitude"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/longitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/longitude"
+                    android:textSize="22sp" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/ic_map"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/map"
-                android:contentDescription="@string/open_map"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:onClick="openMap"/>
+                android:contentDescription="@string/open_map"
+                android:onClick="openMap"
+                android:src="@drawable/map" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,8 +92,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="24sp"
-                android:text="@string/main_description"/>
+                android:text="@string/main_description"
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:id="@+id/tempContainer"
@@ -106,8 +108,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-thin"
-                    android:textSize="90sp"
-                    android:text="@string/main_temperature"/>
+                    android:text="@string/main_temperature"
+                    android:textSize="90sp" />
 
                 <Space
                     android:layout_width="30dp"
@@ -136,8 +138,8 @@
                     android:id="@+id/feels_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="@string/feels_like"/>
+                    android:text="@string/feels_like"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -151,8 +153,8 @@
                     android:id="@+id/temp_min"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="@string/min_temperature"/>
+                    android:text="@string/min_temperature"
+                    android:textSize="18sp" />
 
                 <Space
                     android:layout_width="25dp"
@@ -162,8 +164,8 @@
                     android:id="@+id/temp_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="@string/max_temperature"/>
+                    android:text="@string/max_temperature"
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -194,9 +196,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/sunrise"
-                        app:tint="#FFFFFF"
-                        android:importantForAccessibility="no" />
+                        app:tint="#FFFFFF" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -212,8 +214,8 @@
                         android:id="@+id/txt_sunrise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="@string/sunrise" />
+                        android:text="@string/sunrise"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <Space
@@ -232,9 +234,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/sunset"
-                        app:tint="#FFFFFF"
-                        android:importantForAccessibility="no" />
+                        app:tint="#FFFFFF" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -270,9 +272,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/wind"
-                        app:tint="#FFFFFF"
-                        android:importantForAccessibility="no" />
+                        app:tint="#FFFFFF" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -315,9 +317,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/pressure"
-                        app:tint="#FFFFFF"
-                        android:importantForAccessibility="no" />
+                        app:tint="#FFFFFF" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -353,9 +355,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/humidity"
-                        app:tint="#FFFFFF"
-                        android:importantForAccessibility="no" />
+                        app:tint="#FFFFFF" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -391,9 +393,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/info"
-                        app:tint="#FFFFFF"
-                        android:importantForAccessibility="no" />
+                        app:tint="#FFFFFF" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -420,11 +422,10 @@
         android:id="@+id/loading_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="25dp"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <ProgressBar
             android:id="@+id/loader"
@@ -441,8 +442,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading"
-            android:textSize="30sp"
-            />
+            android:textSize="30sp" />
     </LinearLayout>
 
 </RelativeLayout>

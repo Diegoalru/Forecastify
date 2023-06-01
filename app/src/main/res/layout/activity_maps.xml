@@ -11,19 +11,18 @@
         android:id="@+id/et_search_location"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:textAlignment="center"
         android:hint="@string/search_location_hint"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:maxLength="32"
         android:lines="1"
+        android:maxLength="32"
+        android:textAlignment="center"
         android:theme="@style/search_location" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dividerColor="@color/black"
-        />
+        app:dividerColor="@color/black" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +32,7 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <Button
             android:id="@+id/btn_get_location"

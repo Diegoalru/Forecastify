@@ -41,7 +41,7 @@
     <string name="btn_select_location">Select location</string>
     <string name="search_location_hint">Search location</string>
     <string name="open_map">Open Map</string>
-    <string name="location_not_found" >Location not found</string>
+    <string name="location_not_found">Location not found</string>
     <string name="error_connection">Error on connection</string>
     <!-- MapsActivity -->
 

@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
 
-class MapsActivity: AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -35,8 +35,7 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         binding.etSearchLocation.setOnEditorActionListener { text, actionId, event ->
@@ -108,7 +107,9 @@ class MapsActivity: AppCompatActivity(), OnMapReadyCallback {
             val addressList: List<Address>
             val geoCoder = Geocoder(this)
             addressList = geoCoder.getFromLocationName(locationTxt, 1)!!
+
             mMap.clear()
+
             location = LatLng(addressList[0].latitude, addressList[0].longitude)
             mMap.addMarker(MarkerOptions().position(location).title(locationTxt))
 

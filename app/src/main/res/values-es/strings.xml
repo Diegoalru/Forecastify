@@ -41,7 +41,7 @@
     <string name="btn_get_your_location">Tu ubicación</string>
     <string name="btn_select_location">Establecer ubicación</string>
     <string name="search_location_hint">Buscar ubicación</string>
-    <string name="location_not_found" >Ubicación no encontrada</string>
+    <string name="location_not_found">Ubicación no encontrada</string>
     <string name="error_connection">Error en la conexión</string>
 
     <!-- MapsActivity -->
