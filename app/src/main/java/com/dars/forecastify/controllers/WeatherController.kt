@@ -6,21 +6,16 @@ import com.dars.forecastify.BuildConfig
 import com.dars.forecastify.models.WeatherData
 import com.dars.forecastify.service.WeatherApiService
 import com.google.android.gms.maps.model.LatLng
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 class WeatherController {
 
     private val locationController = LocationController()
-
-    private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.openweathermap.org/data/2.5/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-    }
+    private val retofitController = Retrofit()
+    private val url: String = "https://api.openweathermap.org/data/2.5/"
 
     private fun getWeatherApiService(): WeatherApiService {
-        return getRetrofit().create(WeatherApiService::class.java)
+        return retofitController.getRetrofit(this.url).create(WeatherApiService::class.java)
     }
 
     /**
