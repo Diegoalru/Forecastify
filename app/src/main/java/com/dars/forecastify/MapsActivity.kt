@@ -43,7 +43,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Servicio de Google Maps AutocompleteAPI.
         if (!isInitialized()) {
-            initialize(this, BuildConfig.MAPS_API_KEY)
+            initialize(this, BuildConfig.PLACES_API_KEY)
         }
 
         createClient(this) // Inicializamos el cliente de Places.

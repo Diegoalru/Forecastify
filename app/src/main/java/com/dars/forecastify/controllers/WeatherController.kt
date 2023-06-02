@@ -32,7 +32,7 @@ class WeatherController {
     ): WeatherData? {
         val weatherApi = getWeatherApiService()
 
-        val apiKey = BuildConfig.API_KEY
+        val apiKey = BuildConfig.WEATHER_API_KEY
 
         // convert userLocation to location
         val location: Location? = if (userLocation != null) {
