@@ -198,14 +198,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                         if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
                     })
                 temp.text = getString(
-                    R.string.main_temperature, "${main.temperature} $unitOfMeasure"
+                    R.string.main_temperature, "${main.temperature}$unitOfMeasure"
                 )
-                feelsLike.text = getString(R.string.feels_like, "${main.feelsLike} $unitOfMeasure")
+                feelsLike.text = getString(R.string.feels_like, "${main.feelsLike}$unitOfMeasure")
                 tempMin.text = getString(
-                    R.string.min_temperature, "${main.temperatureMin} $unitOfMeasure"
+                    R.string.min_temperature, "${main.temperatureMin}$unitOfMeasure"
                 )
                 tempMax.text = getString(
-                    R.string.max_temperature, "${main.temperatureMax} $unitOfMeasure"
+                    R.string.max_temperature, "${main.temperatureMax}$unitOfMeasure"
                 )
                 txtSunrise.text = getString(
                     R.string.sunrise, dateUtils.convertUnixDate(sys.sunrise, false)
