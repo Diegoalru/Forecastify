@@ -7,17 +7,12 @@
     android:orientation="vertical"
     tools:context=".MapsActivity">
 
-    <EditText
-        android:id="@+id/et_search_location"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/autocomplete_fragment"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/search_location_hint"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:lines="1"
-        android:maxLength="32"
-        android:textAlignment="center"
-        android:theme="@style/search_location" />
+        android:layout_height="wrap_content"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
@@ -46,7 +41,8 @@
             android:onClick="onGetLocationClick"
             android:text="@string/btn_get_your_location"
             android:theme="@style/Map_Buttons"
-            app:icon="@drawable/ic_actual_location_marker" />
+            app:icon="@drawable/ic_actual_location_marker"
+            tools:ignore="RelativeOverlap" />
 
         <Button
             android:id="@+id/btn_set_location"
