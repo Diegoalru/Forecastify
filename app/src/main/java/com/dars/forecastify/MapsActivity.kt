@@ -1,23 +1,27 @@
 package com.dars.forecastify
 
 import android.content.Intent
-import android.location.Address
-import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dars.forecastify.controllers.LocationController
 import com.dars.forecastify.databinding.ActivityMapsBinding
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import java.io.IOException
+import com.google.android.libraries.places.api.Places.createClient
+import com.google.android.libraries.places.api.Places.initialize
+import com.google.android.libraries.places.api.Places.isInitialized
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -33,19 +37,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        // Servicio de Googe Maps.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        binding.etSearchLocation.setOnEditorActionListener { text, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                searchLocation(text.text.toString())
-                true
-            } else {
-                false
-            }
+        // Servicio de Google Maps AutocompleteAPI.
+        if (!isInitialized()) {
+            initialize(this, BuildConfig.MAPS_API_KEY)
         }
 
+        createClient(this) // Inicializamos el cliente de Places.
+
+        val autocompleteFragment =
+            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment
+
+        // Establecemos el tipo de datos que se obtendran de la API.
+        autocompleteFragment.setPlaceFields(
+            listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.LAT_LNG
+            )
+        )
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                mMap.clear()
+                location = LatLng(place.latLng!!.latitude, place.latLng!!.longitude)
+                mMap.addMarker(MarkerOptions().position(location))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
+            }
+
+            override fun onError(status: Status) {
+                Log.e("[MapsActivity]", "An error occurred: $status.")
+            }
+        })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -62,10 +90,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             location = latLng
 
             mMap.addMarker(MarkerOptions().position(latLng))
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14f))
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12f))
         }
     }
 
+    /**
+     * Muestra la ubicación actual del usuario.
+     */
     fun onGetLocationClick(view: View) {
         mMap.clear()
         getCurrentLocation()
@@ -82,6 +113,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /**
+     * Obtiene la dirección de la ubicación seleccionada
+     */
     fun onSetLocationClick(view: View) {
         val resultIntent = Intent(this, MainActivity::class.java)
 
@@ -94,54 +128,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setResult(RESULT_OK, resultIntent)
         finish()
-    }
-
-    private fun searchLocation(locationTxt: String) {
-        if (locationTxt.isEmpty()) {
-            Toast.makeText(this, "provide location", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        try {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                val geocodeListener = Geocoder.GeocodeListener { addresses ->
-                    if (addresses.size > 0) {
-                        mMap.clear()
-
-                        val address = addresses[0]
-                        location = LatLng(address.latitude, address.longitude)
-                        mMap.addMarker(MarkerOptions().position(location).title(locationTxt))
-
-                        // Get current zoom level and zoom in
-                        val zoomLevel = mMap.cameraPosition.zoom + 2f
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
-                    }
-                }
-
-                val geoCoder = Geocoder(this)
-                geoCoder.getFromLocationName(locationTxt, 1, geocodeListener)
-            } else {
-                val addressList: List<Address>
-                val geoCoder = Geocoder(this)
-                addressList = geoCoder.getFromLocationName(locationTxt, 1)!!
-
-                mMap.clear()
-
-                location = LatLng(addressList[0].latitude, addressList[0].longitude)
-                mMap.addMarker(MarkerOptions().position(location).title(locationTxt))
-
-                // Get current zoom level and zoom in
-                val zoomLevel = mMap.cameraPosition.zoom + 2f
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel))
-            }
-
-        } catch (e: IOException) {
-            Toast.makeText(this, getString(R.string.error_connection), Toast.LENGTH_SHORT).show()
-        } catch (e: IndexOutOfBoundsException) {
-            Toast.makeText(this, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }
