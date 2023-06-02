@@ -7,7 +7,9 @@ Forecastify is an Android application developed in Kotlin that displays weather 
 - Integration with the OpenWeather API to fetch real-time data.
 - Weather data updates with just a button press.
 - Displays temperature in Celsius, Fahrenheit, and Kelvin.
-- Select the location on the map.
+- Select the location on the map to get weather data.
+- Fetch the location name using the Google Places API.
+- Displays the location on a map using the Google Maps API.
 
 ## Technologies used:
 - Kotlin as the main programming language.
@@ -15,6 +17,7 @@ Forecastify is an Android application developed in Kotlin that displays weather 
 - Retrofit for making HTTP requests to the OpenWeather API.
 - GSON for processing JSON responses.
 - Google Maps API for displaying the location on a map.
+- Google Places API for fetching the location name.
 
 This project has been created as part of a learning exercise for mobile app development using Kotlin and the OpenWeather API.
 
