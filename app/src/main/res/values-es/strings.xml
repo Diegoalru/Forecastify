@@ -13,7 +13,7 @@
     <string name="max_temperature">Max %1$s</string>
     <string name="sunrise">%1$s</string>
     <string name="sunset">%1$s</string>
-    <string name="wind">%1$s m/s</string>
+    <string name="wind">%1$s</string>
     <string name="pressure">%1$s hPa</string>
     <string name="humidity">%1$s %%</string>
     <string name="loading">Cargando…</string>

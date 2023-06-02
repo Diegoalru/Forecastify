@@ -212,7 +212,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 )
                 txtSunset.text =
                     getString(R.string.sunset, dateUtils.convertUnixDate(sys.sunset, false))
-                txtWind.text = getString(R.string.wind, wind.speed.toString())
+                txtWind.text = if(unit == Unit.IMPERIAL) {
+                    getString(R.string.wind, "${wind.speed} mph")
+                } else {
+                    getString(R.string.wind, "${wind.speed} m/s")
+                }
                 txtPressure.text = getString(R.string.pressure, main.pressure.toString())
                 txtHumidity.text = getString(R.string.humidity, main.humidity.toString())
             }
